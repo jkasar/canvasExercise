@@ -20,21 +20,34 @@ var ctx = canvas.getContext('2d');
 //ball.cx;  100
 //ball.cy;  100
 var ballz = [];
-for (var i = 0; i < 1 ; i++) {
-	var x = Math.random()*innerWidth/2 + innerWidth/4;
-	var y = Math.random()*innerHeight/2 + innerHeight/4;
-	var r = Math.random()*50;
-	var b = new BouncyBall(canvas, x, y, 2 )
-	ballz.push(b)
-}
+// for (var i = 0; i < 2 ; i++) {
+// 	var x = Math.random()*innerWidth/2 + innerWidth/4;
+// 	var y = Math.random()*innerHeight/2 + innerHeight/4;
+// 	var r = Math.random()*25;
+// 	var b = new BouncyBall(canvas, x, y, r );
+// 	ballz.push(b)
+// }
 
 function resizeCanvas(){
 	canvas.width = innerWidth;
 	canvas.height = innerHeight;
 }
 function keyPress(eve){
+
 	if(eve.charCode == 115){
-		saveImage(canvas, 'circle.png');
+		//saveImage(canvas, 'circle.png');
+		for (var i = 0; i < 1 ; i++) {
+			var x = Math.random()*innerWidth/2 + innerWidth/4;
+			var y = Math.random()*innerHeight/2 + innerHeight/4;
+			var r = Math.random()*50;
+			var b = new BouncyBall(canvas, x, y, r );
+			ballz.push(b)
+		}
+	}
+	if(eve.charCode == 100){
+		//saveImage(canvas, 'circle.png');
+		ctx.fillStyle = 'rgba(0,0,0, 0.1)';
+		ctx.fillRect(0,0, canvas.width, canvas.height);
 	}
 }
 /* ----------------------------------------------
@@ -50,8 +63,6 @@ window.addEventListener('keypress', keyPress);
 					~DRAW~
 -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_*/
 function draw(){
-
-
 
 	for (var i = 0; i < ballz.length; i++) {
 		ballz[i].update();
