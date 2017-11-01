@@ -13,7 +13,9 @@ var cy = 300;
 
 var dx = 1;
 var dy = 1;
-var cr = cr = 50;
+
+var cr = 100;
+var dr = 0;
 
 //context= space where things are happening
 //can pass weg-gl or 2d
@@ -53,12 +55,6 @@ function draw(){
 	cx += dx;
 	cy += dy;
 
-
-	circle(ctx, cx, cy, cr);
-
-	//ctx.fillStyle = 'rgba(0,0,0, 0.1)';
-	//ctx.fillRect(0,0, canvas.width, canvas.height);
-
 	if (cy >= canvas.height -cr || cy <= cr  ){
 		dy = -dy;
 	}
@@ -66,8 +62,17 @@ function draw(){
 	if (cx >= canvas.width -cr || cx <= cr ){
 		dx = -dx;
 	}
+	dr++;
+	var r = Math.abs(Math.sin(dr)* cr);
+	//var sin = Math.sin(50);
+	circle(ctx, cx, cy, r);
 
-	console.log('test');
+	ctx.fillStyle = 'rgba(0,0,0, 0.1)';
+	ctx.fillRect(0,0, canvas.width, canvas.height);
+
+
+
+	//console.log('test');
 	requestAnimationFrame(draw);
 }
 
