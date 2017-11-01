@@ -10,10 +10,8 @@ var ctx = canvas.getContext('2d');
 
 var cx = 300;
 var cy = 300;
-
 var dx = 1;
 var dy = 1;
-
 var cr = 100;
 var dr = 0;
 
@@ -28,6 +26,12 @@ function resizeCanvas(){
 	canvas.height = innerHeight;
 }
 
+function keyPress(eve){
+	if(eve.charCode == 115){
+		saveImage(canvas, 'circle.png');
+	}
+}
+
 
 
 /* ----------------------------------------------
@@ -35,6 +39,7 @@ function resizeCanvas(){
 ------------------------------------------------*/
 
 window.addEventListener('resize', resizeCanvas);
+window.addEventListener('keypress', keyPress);
 //window.addEventListener('resize', anotherFunction); can attach multiple
 //-functions to the same event
 //can add event listener to any html piece, takes two fucntions, event to listen
@@ -49,11 +54,10 @@ function draw(){
 	//ctx.fillStyle = 'rgb(0,0,50)';
 	//ctx.fillRect(0,0, canvas.width, canvas.height);
 	//ctx.lineWidth = 30;
-	ctx.strokeStyle = 'rgb(255,0,0)';
+	//ctx.strokeStyle = 'rgb(255,0,0)';
 	//ctx.strokeRect(0,0, canvas.width, canvas.height);
-
-	cx += dx;
-	cy += dy;
+	cx += dx * 10;
+	cy += dy * 10;
 
 	if (cy >= canvas.height -cr || cy <= cr  ){
 		dy = -dy;
@@ -62,19 +66,20 @@ function draw(){
 	if (cx >= canvas.width -cr || cx <= cr ){
 		dx = -dx;
 	}
-	dr++;
-	var r = Math.abs(Math.sin(dr)* cr);
+
+	dr += 0.05;
+	var r = Math.abs(Math.sin(dr) * cr);
 	//var sin = Math.sin(50);
 	circle(ctx, cx, cy, r);
-
-	ctx.fillStyle = 'rgba(0,0,0, 0.1)';
-	ctx.fillRect(0,0, canvas.width, canvas.height);
-
-
-
-	//console.log('test');
+	//ctx.fillStyle = 'rgba(0,0,0, 0.1)';
+	//ctx.fillRect(0,0, canvas.width, canvas.height);
 	requestAnimationFrame(draw);
 }
+
+// setTimeout(function(){
+// 	saveImage(canvas, 'circleTry.png');
+// 	console.log("worked");
+// }, 5000);
 
 
 resizeCanvas();
